@@ -14,6 +14,10 @@
 		44ED235826C1C77F00649CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED235726C1C77F00649CEB /* Assets.xcassets */; };
 		44ED235B26C1C77F00649CEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44ED235926C1C77F00649CEB /* LaunchScreen.storyboard */; };
 		44ED236326C1CB5E00649CEB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED236226C1CB5E00649CEB /* AuthService.swift */; };
+		44ED236926C1DFAD00649CEB /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED236726C1DFAD00649CEB /* SF-Pro-Display-Medium.otf */; };
+		44ED236A26C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED236826C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf */; };
+		44ED236C26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED236B26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf */; };
+		44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED236E26C1E05900649CEB /* UIFont + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		44ED235A26C1C77F00649CEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44ED235C26C1C77F00649CEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44ED236226C1CB5E00649CEB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		44ED236726C1DFAD00649CEB /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		44ED236826C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		44ED236B26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		44ED236E26C1E05900649CEB /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -72,11 +80,12 @@
 		44ED234D26C1C77C00649CEB /* vkgallery */ = {
 			isa = PBXGroup;
 			children = (
+				44ED236D26C1E04B00649CEB /* Extensions */,
+				44ED236526C1DF6800649CEB /* Assets */,
 				44ED236426C1CB6100649CEB /* Services */,
 				44ED234E26C1C77C00649CEB /* AppDelegate.swift */,
 				44ED235026C1C77C00649CEB /* SceneDelegate.swift */,
 				44ED235226C1C77C00649CEB /* AuthVC.swift */,
-				44ED235726C1C77F00649CEB /* Assets.xcassets */,
 				44ED235926C1C77F00649CEB /* LaunchScreen.storyboard */,
 				44ED235C26C1C77F00649CEB /* Info.plist */,
 			);
@@ -89,6 +98,33 @@
 				44ED236226C1CB5E00649CEB /* AuthService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		44ED236526C1DF6800649CEB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				44ED236626C1DF7300649CEB /* Fonts */,
+				44ED235726C1C77F00649CEB /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		44ED236626C1DF7300649CEB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				44ED236726C1DFAD00649CEB /* SF-Pro-Display-Medium.otf */,
+				44ED236826C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf */,
+				44ED236B26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		44ED236D26C1E04B00649CEB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44ED236E26C1E05900649CEB /* UIFont + Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
@@ -158,6 +194,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ED236A26C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf in Resources */,
+				44ED236C26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf in Resources */,
+				44ED236926C1DFAD00649CEB /* SF-Pro-Display-Medium.otf in Resources */,
 				44ED235B26C1C77F00649CEB /* LaunchScreen.storyboard in Resources */,
 				44ED235826C1C77F00649CEB /* Assets.xcassets in Resources */,
 			);
@@ -212,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */,
 				44ED235326C1C77C00649CEB /* AuthVC.swift in Sources */,
 				44ED234F26C1C77C00649CEB /* AppDelegate.swift in Sources */,
 				44ED235126C1C77C00649CEB /* SceneDelegate.swift in Sources */,
