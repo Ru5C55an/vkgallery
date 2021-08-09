@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthVC: UIViewController {
+final class AuthVC: UIViewController {
 
     // MARK: - Constants
     private enum Constants {
@@ -40,8 +40,12 @@ class AuthVC: UIViewController {
         button.backgroundColor = Constants.authBtnBgColor
         button.setTitleColor(Constants.authBtnTitleColor, for: UIControl.State())
         button.layer.cornerRadius = Constants.authBtnCornerRadius
+        button.addTarget(self, action: #selector(authAction), for: .touchUpInside)
         return button
     }()
+    
+    // MARK: - Properties
+    private let authService = AuthService.shared
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -69,5 +73,10 @@ class AuthVC: UIViewController {
             make.height.equalTo(Constants.authBtnHeight)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
         }
+    }
+    
+    // MARK: - Handlers
+    @objc private func authAction() {
+        authService.wakeUpSession()
     }
 }

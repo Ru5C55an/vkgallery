@@ -19,6 +19,7 @@
 		44ED236C26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED236B26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf */; };
 		44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED236E26C1E05900649CEB /* UIFont + Extension.swift */; };
 		44ED237126C1E2BD00649CEB /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237026C1E2BD00649CEB /* ColorAssets.swift */; };
+		44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237426C1EDAA00649CEB /* FeedVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		44ED236B26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		44ED236E26C1E05900649CEB /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		44ED237026C1E2BD00649CEB /* ColorAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
+		44ED237426C1EDAA00649CEB /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -82,12 +84,12 @@
 		44ED234D26C1C77C00649CEB /* vkgallery */ = {
 			isa = PBXGroup;
 			children = (
+				44ED236426C1CB6100649CEB /* Services */,
+				44ED237626C1EDBF00649CEB /* Screens */,
 				44ED236D26C1E04B00649CEB /* Extensions */,
 				44ED236526C1DF6800649CEB /* Assets */,
-				44ED236426C1CB6100649CEB /* Services */,
 				44ED234E26C1C77C00649CEB /* AppDelegate.swift */,
 				44ED235026C1C77C00649CEB /* SceneDelegate.swift */,
-				44ED235226C1C77C00649CEB /* AuthVC.swift */,
 				44ED235926C1C77F00649CEB /* LaunchScreen.storyboard */,
 				44ED235C26C1C77F00649CEB /* Info.plist */,
 			);
@@ -128,6 +130,31 @@
 				44ED236E26C1E05900649CEB /* UIFont + Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		44ED237626C1EDBF00649CEB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				44ED237826C1EDCC00649CEB /* Feed */,
+				44ED237726C1EDC800649CEB /* Auth */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		44ED237726C1EDC800649CEB /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				44ED235226C1C77C00649CEB /* AuthVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		44ED237826C1EDCC00649CEB /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				44ED237426C1EDAA00649CEB /* FeedVC.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
@@ -255,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44ED237126C1E2BD00649CEB /* ColorAssets.swift in Sources */,
+				44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */,
 				44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */,
 				44ED235326C1C77C00649CEB /* AuthVC.swift in Sources */,
 				44ED234F26C1C77C00649CEB /* AppDelegate.swift in Sources */,
