@@ -6,6 +6,6 @@ target 'vkgallery' do
   use_frameworks!
 
   # Pods for vkgallery
-pod "VK-ios-sdk" 
-
+  pod 'VK-ios-sdk'
+  pod 'SnapKit'
 end
