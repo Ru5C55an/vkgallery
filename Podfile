@@ -8,4 +8,6 @@ target 'vkgallery' do
   # Pods for vkgallery
   pod 'VK-ios-sdk'
   pod 'SnapKit'
+  pod 'Alamofire'
+  pod 'Kingfisher'
 end

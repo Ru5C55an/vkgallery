@@ -20,6 +20,16 @@
 		44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED236E26C1E05900649CEB /* UIFont + Extension.swift */; };
 		44ED237126C1E2BD00649CEB /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237026C1E2BD00649CEB /* ColorAssets.swift */; };
 		44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237426C1EDAA00649CEB /* FeedVC.swift */; };
+		44ED237C26C2EB7C00649CEB /* PhotosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237B26C2EB7C00649CEB /* PhotosAPI.swift */; };
+		44ED237E26C2ECA800649CEB /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237D26C2ECA800649CEB /* BaseAPI.swift */; };
+		44ED238026C2ED4A00649CEB /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED237F26C2ED4A00649CEB /* NetworkErrors.swift */; };
+		44ED238426C2EEE300649CEB /* GetPhotoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED238326C2EEE300649CEB /* GetPhotoRequest.swift */; };
+		44ED238726C2EF6100649CEB /* GetPhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED238626C2EF6100649CEB /* GetPhotosResponse.swift */; };
+		44ED238A26C2EFB600649CEB /* RequestDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED238926C2EFB600649CEB /* RequestDecoder.swift */; };
+		44ED238C26C2F53600649CEB /* JsonDecodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED238B26C2F53600649CEB /* JsonDecodeExtensions.swift */; };
+		44ED238E26C2F67900649CEB /* StatusMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED238D26C2F67900649CEB /* StatusMessage.swift */; };
+		44ED239126C2F6FC00649CEB /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED239026C2F6FC00649CEB /* RequestInterceptor.swift */; };
+		44ED239426C3060500649CEB /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED239326C3060500649CEB /* PhotoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +48,16 @@
 		44ED236E26C1E05900649CEB /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		44ED237026C1E2BD00649CEB /* ColorAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
 		44ED237426C1EDAA00649CEB /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		44ED237B26C2EB7C00649CEB /* PhotosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAPI.swift; sourceTree = "<group>"; };
+		44ED237D26C2ECA800649CEB /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		44ED237F26C2ED4A00649CEB /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
+		44ED238326C2EEE300649CEB /* GetPhotoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhotoRequest.swift; sourceTree = "<group>"; };
+		44ED238626C2EF6100649CEB /* GetPhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhotosResponse.swift; sourceTree = "<group>"; };
+		44ED238926C2EFB600649CEB /* RequestDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDecoder.swift; sourceTree = "<group>"; };
+		44ED238B26C2F53600649CEB /* JsonDecodeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeExtensions.swift; sourceTree = "<group>"; };
+		44ED238D26C2F67900649CEB /* StatusMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMessage.swift; sourceTree = "<group>"; };
+		44ED239026C2F6FC00649CEB /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
+		44ED239326C3060500649CEB /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -84,6 +104,7 @@
 		44ED234D26C1C77C00649CEB /* vkgallery */ = {
 			isa = PBXGroup;
 			children = (
+				44ED238126C2EECB00649CEB /* API */,
 				44ED236426C1CB6100649CEB /* Services */,
 				44ED237626C1EDBF00649CEB /* Screens */,
 				44ED236D26C1E04B00649CEB /* Extensions */,
@@ -155,6 +176,63 @@
 				44ED237426C1EDAA00649CEB /* FeedVC.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		44ED238126C2EECB00649CEB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				44ED238826C2EFAC00649CEB /* Helpers */,
+				44ED238226C2EED700649CEB /* Requests */,
+				44ED238526C2EF4900649CEB /* Responses */,
+				44ED239226C305F700649CEB /* Models */,
+				44ED237B26C2EB7C00649CEB /* PhotosAPI.swift */,
+				44ED237D26C2ECA800649CEB /* BaseAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		44ED238226C2EED700649CEB /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				44ED238326C2EEE300649CEB /* GetPhotoRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		44ED238526C2EF4900649CEB /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				44ED238626C2EF6100649CEB /* GetPhotosResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		44ED238826C2EFAC00649CEB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				44ED238F26C2F67F00649CEB /* Models */,
+				44ED238926C2EFB600649CEB /* RequestDecoder.swift */,
+				44ED237F26C2ED4A00649CEB /* NetworkErrors.swift */,
+				44ED238B26C2F53600649CEB /* JsonDecodeExtensions.swift */,
+				44ED239026C2F6FC00649CEB /* RequestInterceptor.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		44ED238F26C2F67F00649CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44ED238D26C2F67900649CEB /* StatusMessage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44ED239226C305F700649CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44ED239326C3060500649CEB /* PhotoModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
@@ -281,13 +359,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ED239126C2F6FC00649CEB /* RequestInterceptor.swift in Sources */,
 				44ED237126C1E2BD00649CEB /* ColorAssets.swift in Sources */,
 				44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */,
 				44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */,
+				44ED238C26C2F53600649CEB /* JsonDecodeExtensions.swift in Sources */,
 				44ED235326C1C77C00649CEB /* AuthVC.swift in Sources */,
 				44ED234F26C1C77C00649CEB /* AppDelegate.swift in Sources */,
+				44ED238E26C2F67900649CEB /* StatusMessage.swift in Sources */,
 				44ED235126C1C77C00649CEB /* SceneDelegate.swift in Sources */,
+				44ED238426C2EEE300649CEB /* GetPhotoRequest.swift in Sources */,
 				44ED236326C1CB5E00649CEB /* AuthService.swift in Sources */,
+				44ED238026C2ED4A00649CEB /* NetworkErrors.swift in Sources */,
+				44ED237C26C2EB7C00649CEB /* PhotosAPI.swift in Sources */,
+				44ED239426C3060500649CEB /* PhotoModel.swift in Sources */,
+				44ED237E26C2ECA800649CEB /* BaseAPI.swift in Sources */,
+				44ED238A26C2EFB600649CEB /* RequestDecoder.swift in Sources */,
+				44ED238726C2EF6100649CEB /* GetPhotosResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
