@@ -12,7 +12,7 @@ struct StatusMessage: Codable {
 }
 
 struct ErrorModel: Codable {
-    let errorCode: Int?
+    let errorCode: Int
     let errorMsg: String
     
     enum CodingKeys: String, CodingKey {

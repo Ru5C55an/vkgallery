@@ -13,10 +13,10 @@ struct PhotoModel: Codable {
     let hasTags: Bool
     let id: Int
     let ownerId: Int
-    let sizes: [PhotoSizesModel]
+    let sizes: [PhotoSizeModel]
 }
 
-struct PhotoSizesModel: Codable {
+struct PhotoSizeModel: Codable {
     let height: Int
     let type: String
     let url: URL

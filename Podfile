@@ -10,4 +10,5 @@ target 'vkgallery' do
   pod 'SnapKit'
   pod 'Alamofire'
   pod 'Kingfisher'
+  pod 'lottie-ios'
 end

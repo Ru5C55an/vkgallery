@@ -47,6 +47,7 @@ extension SceneDelegate: AuthServiceDelegate {
     func authServiceSignIn() {
         let feedVC = FeedVC()
         let navigationController = UINavigationController(rootViewController: feedVC)
+        navigationController.navigationBar.setupNavigationBarAppearance()
         window?.rootViewController = navigationController
     }
     
