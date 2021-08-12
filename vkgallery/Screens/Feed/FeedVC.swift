@@ -49,6 +49,11 @@ final class FeedVC: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.standardAppearance.shadowColor = .clear
+    }
+    
     // MARK: - Get photos
     private func getPhotos() {
         if !photos.isEmpty { photos.removeAll() }

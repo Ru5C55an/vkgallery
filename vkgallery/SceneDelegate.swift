@@ -60,6 +60,7 @@ extension SceneDelegate: AuthServiceDelegate {
         let feedVC = FeedVC()
         let navigationController = UINavigationController(rootViewController: feedVC)
         navigationController.navigationBar.setupNavigationBarAppearance()
+        navigationController.additionalSafeAreaInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         window?.rootViewController = navigationController
     }
     

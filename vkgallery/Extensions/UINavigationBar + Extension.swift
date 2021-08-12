@@ -10,6 +10,9 @@ import UIKit
 extension UINavigationBar {
     
     func setupNavigationBarAppearance() {
+        
+        let bottomInset: CGFloat = -6
+        
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.configureWithOpaqueBackground()
         coloredAppearance.backgroundColor = .systemBackground
@@ -30,14 +33,19 @@ extension UINavigationBar {
         coloredAppearance.buttonAppearance = buttonAppearance
         
         coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.primaryColor]
-        coloredAppearance.shadowColor = .clear
         
         let backImage = UIImage(named: "back")?
             .withTintColor(.primaryColor, renderingMode: .alwaysOriginal)
             .withAlignmentRectInsets(
-                UIEdgeInsets(top: 0, left: -10.75, bottom: 0, right: 0))
+                UIEdgeInsets(top: 0, left: -10.75, bottom: bottomInset - 8, right: 0))
         coloredAppearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
         coloredAppearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        
+        coloredAppearance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: bottomInset)
+        coloredAppearance.buttonAppearance.normal.backgroundImagePositionAdjustment = UIOffset(horizontal: 0, vertical: bottomInset)
+        coloredAppearance.buttonAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: bottomInset)
+        coloredAppearance.backButtonAppearance.normal.backgroundImagePositionAdjustment = UIOffset(horizontal: 0, vertical: bottomInset)
+        coloredAppearance.backButtonAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: bottomInset)
         
         UINavigationBar.appearance().standardAppearance = coloredAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
