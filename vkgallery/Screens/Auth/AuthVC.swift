@@ -61,8 +61,8 @@ final class AuthVC: UIViewController {
         view.addSubview(titleLabel)
     }
     
+    // MARK: - Setup constraints
     private func setupConstrsints() {
-        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(117)
             make.left.right.equalToSuperview().inset(24)

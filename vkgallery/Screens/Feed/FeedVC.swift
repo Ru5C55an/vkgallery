@@ -25,8 +25,8 @@ final class FeedVC: UIViewController {
     // MARK: - UI Elements
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = 2
-        flowLayout.minimumLineSpacing = 2
+        flowLayout.minimumInteritemSpacing = Constants.itemSpacing
+        flowLayout.minimumLineSpacing = Constants.itemSpacing
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseIdentifier)
         collectionView.delegate = self
@@ -37,7 +37,7 @@ final class FeedVC: UIViewController {
     
     // MARK: - Properties
     private let authService = AuthService.shared
-    private var photos: [PhotoSizeModel] = []
+    private var photos: [PhotoModel] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -46,22 +46,21 @@ final class FeedVC: UIViewController {
         getPhotos()
         setupViews()
         setupConstraints()
+        
+        print("asiodjaoisdja: ", navigationController?.navigationBar.frame.size.height)
     }
     
     // MARK: - Get photos
     private func getPhotos() {
         if !photos.isEmpty { photos.removeAll() }
         let request = GetPhotosRequest(ownerId: Constants.ownerId, albumId: Constants.albumId)
-        PhotosAPI.getPhotos(request: request) { result in
+        PhotosAPI.getPhotos(request: request) { [weak self] result in
             switch result {
             
             case .success(let response):
                 print("Successfull get photos for ownerId \(Constants.ownerId), albumId \(Constants.albumId): ", response)
-                response.response.items.forEach { [weak self] photoItem in
-                    guard let photoSize = photoItem.sizes.last else { return }
-                    self?.photos.append(photoSize)
-                }
-                self.collectionView.reloadData()
+                self?.photos = response.response.items
+                self?.collectionView.reloadData()
             case .failure(let error):
                 print("ERROR_LOG Error get photos from album user: ", error.message)
             }
@@ -88,37 +87,10 @@ final class FeedVC: UIViewController {
         }
     }
     
-    private func setImage(for cell: PhotoCell, imageUrl: URL, size: CGSize) {
-        let processor = DownsamplingImageProcessor(size: size)
-        var loadingIndicator = ImageIndicator()
-        cell.imageView.kf.indicatorType = .custom(indicator: loadingIndicator)
-        cell.imageView.kf.setImage(
-            with: imageUrl,
-            options: [
-                .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-//                .transition(.fade(1)),
-                .cacheOriginalImage
-            ],
-            progressBlock: { receivedSize, totalSize in
-                let percentage = CGFloat(receivedSize) / CGFloat(totalSize)
-                loadingIndicator.percentage = percentage
-                print("Progress: \(percentage * 100.0)%")
-            })
-        {
-            result in
-            switch result {
-            case .success(let value):
-                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-            case .failure(let error):
-                print("Job failed: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     // MARK: - Handlers
     @objc private func exitAction() {
-
+        authService.logout()
+        
     }
 }
 
@@ -137,11 +109,21 @@ extension FeedVC: UICollectionViewDelegate, UICollectionViewDataSource {
         else {
             print("ERROR_LOG Error get PhotoCell for index path \(indexPath)")
             return UICollectionViewCell() }
-        let photo = photos[indexPath.row]
+        guard let photo = photos[indexPath.row].sizes.last else {
+            print("ERROR_LOG Error get photo for index path \(indexPath)")
+            return UICollectionViewCell()
+        }
+        
         let imageUrl = photo.url
         let imageSize = CGSize(width: photo.width, height: photo.height)
-        setImage(for: cell, imageUrl: imageUrl, size: imageSize)
+        cell.imageView.setImage(imageUrl: imageUrl, size: imageSize)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photo = photos[indexPath.row]
+        let fullscreenPhotosVC = FullscreenPhotosVC(images: photos, selectedImage: photo)
+        navigationController?.pushViewController(fullscreenPhotosVC, animated: true)
     }
 }
 
@@ -165,3 +147,5 @@ extension FeedVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: size, height: size)
     }
 }
+
+

@@ -32,6 +32,10 @@ extension UINavigationBar {
         coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.primaryColor]
         coloredAppearance.shadowColor = .clear
         
+        let backImage = UIImage(named: "back")?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -10.75, bottom: 0, right: 0))
+        coloredAppearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
+        coloredAppearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        
         UINavigationBar.appearance().standardAppearance = coloredAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
         UINavigationBar.appearance().compactAppearance = coloredAppearance

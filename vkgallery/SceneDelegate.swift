@@ -18,6 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        return sceneDelegate
 //    }
 
+    let authVC = AuthVC()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -26,8 +28,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowsScene.coordinateSpace.bounds)
         window?.windowScene = windowsScene
         AuthService.shared.delegate = self
-        let authVC = AuthVC()
-        window?.rootViewController = authVC
+        
+        if AuthService.shared.token != nil {
+            print("asdjasdoiajsdiasdj")
+            let feedVC = FeedVC()
+            let navigationController = UINavigationController(rootViewController: feedVC)
+            navigationController.navigationBar.setupNavigationBarAppearance()
+            window?.rootViewController = navigationController
+        } else {
+            window?.rootViewController = authVC
+        }
+        
         window?.makeKeyAndVisible()
     }
     
@@ -52,6 +63,15 @@ extension SceneDelegate: AuthServiceDelegate {
     }
     
     func authServiceSignInDidFail() {
-        
+
+    }
+    
+    func authServiceNeedCaptcha(error: VKError) {
+        let captchaVC = VKCaptchaViewController()
+        captchaVC.present(in: window?.rootViewController)
+    }
+    
+    func authServiceLogout() {
+        window?.rootViewController = authVC
     }
 }

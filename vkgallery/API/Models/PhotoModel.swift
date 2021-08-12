@@ -9,7 +9,7 @@ import Foundation
 
 struct PhotoModel: Codable {
     let albumId: Int
-    let date: Int
+    let date: TimeInterval
     let hasTags: Bool
     let id: Int
     let ownerId: Int

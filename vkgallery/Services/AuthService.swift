@@ -12,6 +12,8 @@ protocol AuthServiceDelegate: AnyObject {
     func authServiceShouldShow(viewController: UIViewController)
     func authServiceSignIn()
     func authServiceSignInDidFail()
+    func authServiceLogout()
+    func authServiceNeedCaptcha(error: VKError)
 }
 
 final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
@@ -35,7 +37,7 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
         return VKSdk.accessToken()?.accessToken
     }
     
-    func wakeUpSession() {
+    func wakeUpSession(isNeedRoute: Bool = true) {
         let scope = ["offline"]
         VKSdk.wakeUpSession(scope) { [delegate] state, error in
             switch state {
@@ -55,7 +57,9 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
                 break
             case .authorized:
                 print("Authorized")
-                delegate?.authServiceSignIn()
+                if isNeedRoute {
+                    delegate?.authServiceSignIn()
+                }
             case .error:
                 print(error?.localizedDescription ?? "ERROR_LOG Unknown error while checking the authorization status")
             default:
@@ -63,6 +67,11 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
                 print(error?.localizedDescription ?? "ERROR_LOG Unknown error while checking the authorization status")
             }
         }
+    }
+    
+    func logout() {
+        VKSdk.forceLogout()
+        delegate?.authServiceLogout()
     }
     
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
@@ -82,6 +91,10 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     }
     
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
-        
+        delegate?.authServiceNeedCaptcha(error: captchaError)
+    }
+    
+    func vkSdkTokenHasExpired(_ expiredToken: VKAccessToken!) {
+        wakeUpSession(isNeedRoute: false)
     }
 }

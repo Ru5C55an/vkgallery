@@ -35,6 +35,10 @@
 		44ED239B26C3125200649CEB /* UICollectionView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED239A26C3125200649CEB /* UICollectionView + Extension.swift */; };
 		44ED239F26C32E2100649CEB /* PhotoLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED239E26C32E2100649CEB /* PhotoLoadingIndicator.swift */; };
 		44ED23A126C331D500649CEB /* ImageLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = 44ED23A026C331D500649CEB /* ImageLoading.json */; };
+		44F1C94426C43D6800E85484 /* FullscreenPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94326C43D6800E85484 /* FullscreenPhotosVC.swift */; };
+		44F1C94626C46B2400E85484 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94526C46B2400E85484 /* UIImageView + Extension.swift */; };
+		44F1C94826C46CB300E85484 /* DateFormatter + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94726C46CB300E85484 /* DateFormatter + Extension.swift */; };
+		44F1C94B26C4846700E85484 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94A26C4846700E85484 /* ImageScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		44ED239A26C3125200649CEB /* UICollectionView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extension.swift"; sourceTree = "<group>"; };
 		44ED239E26C32E2100649CEB /* PhotoLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoadingIndicator.swift; sourceTree = "<group>"; };
 		44ED23A026C331D500649CEB /* ImageLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ImageLoading.json; sourceTree = "<group>"; };
+		44F1C94326C43D6800E85484 /* FullscreenPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotosVC.swift; sourceTree = "<group>"; };
+		44F1C94526C46B2400E85484 /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
+		44F1C94726C46CB300E85484 /* DateFormatter + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + Extension.swift"; sourceTree = "<group>"; };
+		44F1C94A26C4846700E85484 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +122,7 @@
 		44ED234D26C1C77C00649CEB /* vkgallery */ = {
 			isa = PBXGroup;
 			children = (
+				44F1C94926C4845A00E85484 /* Components */,
 				44ED238126C2EECB00649CEB /* API */,
 				44ED236426C1CB6100649CEB /* Services */,
 				44ED236D26C1E04B00649CEB /* Extensions */,
@@ -162,6 +171,8 @@
 				44ED236E26C1E05900649CEB /* UIFont + Extension.swift */,
 				44ED239526C30D0600649CEB /* UINavigationBar + Extension.swift */,
 				44ED239A26C3125200649CEB /* UICollectionView + Extension.swift */,
+				44F1C94526C46B2400E85484 /* UIImageView + Extension.swift */,
+				44F1C94726C46CB300E85484 /* DateFormatter + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -169,6 +180,7 @@
 		44ED237626C1EDBF00649CEB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				44F1C94226C43D3D00E85484 /* Fullscreen */,
 				44ED237826C1EDCC00649CEB /* Feed */,
 				44ED237726C1EDC800649CEB /* Auth */,
 			);
@@ -264,6 +276,22 @@
 				44ED23A026C331D500649CEB /* ImageLoading.json */,
 			);
 			path = Lotties;
+			sourceTree = "<group>";
+		};
+		44F1C94226C43D3D00E85484 /* Fullscreen */ = {
+			isa = PBXGroup;
+			children = (
+				44F1C94326C43D6800E85484 /* FullscreenPhotosVC.swift */,
+			);
+			path = Fullscreen;
+			sourceTree = "<group>";
+		};
+		44F1C94926C4845A00E85484 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				44F1C94A26C4846700E85484 /* ImageScrollView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
@@ -391,20 +419,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44F1C94426C43D6800E85484 /* FullscreenPhotosVC.swift in Sources */,
 				44ED239126C2F6FC00649CEB /* RequestInterceptor.swift in Sources */,
 				44ED237126C1E2BD00649CEB /* ColorAssets.swift in Sources */,
 				44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */,
+				44F1C94826C46CB300E85484 /* DateFormatter + Extension.swift in Sources */,
 				44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */,
 				44ED238C26C2F53600649CEB /* JsonDecodeExtensions.swift in Sources */,
 				44ED239F26C32E2100649CEB /* PhotoLoadingIndicator.swift in Sources */,
 				44ED235326C1C77C00649CEB /* AuthVC.swift in Sources */,
 				44ED234F26C1C77C00649CEB /* AppDelegate.swift in Sources */,
 				44ED238E26C2F67900649CEB /* StatusMessage.swift in Sources */,
+				44F1C94626C46B2400E85484 /* UIImageView + Extension.swift in Sources */,
 				44ED235126C1C77C00649CEB /* SceneDelegate.swift in Sources */,
 				44ED238426C2EEE300649CEB /* GetPhotoRequest.swift in Sources */,
 				44ED239B26C3125200649CEB /* UICollectionView + Extension.swift in Sources */,
 				44ED239626C30D0600649CEB /* UINavigationBar + Extension.swift in Sources */,
 				44ED239926C3123800649CEB /* PhotoCell.swift in Sources */,
+				44F1C94B26C4846700E85484 /* ImageScrollView.swift in Sources */,
 				44ED236326C1CB5E00649CEB /* AuthService.swift in Sources */,
 				44ED238026C2ED4A00649CEB /* NetworkErrors.swift in Sources */,
 				44ED237C26C2EB7C00649CEB /* PhotosAPI.swift in Sources */,
