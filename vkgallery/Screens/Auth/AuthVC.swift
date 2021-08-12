@@ -18,7 +18,7 @@ final class AuthVC: UIViewController {
         static let authBtnTitle = "Вход через VK"
         static let authBtnFont: UIFont? = .sfProDisplay(ofSize: 18, weight: .medium)
         static let authBtnBgColor: UIColor = .primaryColor
-        static let authBtnTitleColor: UIColor = .white
+        static let authBtnTitleColor: UIColor = .btnTitleColor
         static let authBtnHeight: CGFloat = 56
         static let authBtnCornerRadius: CGFloat = 8
     }

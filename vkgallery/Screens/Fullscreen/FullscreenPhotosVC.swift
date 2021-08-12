@@ -67,7 +67,7 @@ final class FullscreenPhotosVC: UIViewController {
         setTitleWith(timeInterval: selectedImage.date)
         navigationController?.navigationBar.standardAppearance.shadowColor = .lightGray
         
-        let shareImage = UIImage(named: "share")
+        let shareImage = UIImage(named: "share")?.withTintColor(.primaryColor, renderingMode: .alwaysOriginal)
         let shareBarButtonItem = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareAction))
         navigationItem.rightBarButtonItem = shareBarButtonItem
     }
@@ -133,16 +133,6 @@ final class FullscreenPhotosVC: UIViewController {
         }
         present(activityController, animated: true)
     }
-    
-    //MARK: - Add image to Library
-     @objc private func addImage(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-         if let error = error {
-             // we got back an error!
-             showAlertWith(title: "Save error", message: error.localizedDescription)
-         } else {
-             showAlertWith(title: "Saved!", message: "Your image has been saved to your photos.")
-         }
-     }
     
     private func showAlertWith(title: String, message: String){
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
