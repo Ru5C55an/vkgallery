@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  vkgallery
+
+  Created by Руслан Садыков on 12.08.2021.
+  
+*/
+
+"kAuthTitle" = "Вход через ВК";
+"kExitBtnTitle" = "Выход";
+"kDefaultAuthError" = "Проверка статуса авторизации вернула неизвестный статус";
+"kCheckStatusError" = "Неизвестная ошибка при проверке статуса авторизации";
+"kDecodingError" = "Ошибка декодинга";
+"kServerError" = "Ошибка сервера";
+"kManyRequestsError" = "Слишком много запросов";
+"kTimeoutError" = "Превышено время ожидания";
+"kAuthError" = "Ошибка авторизации";
+"kServiceUnavailable" = "Сервис временно недоступен, попробуйте позже";
+"kErrorAuthServiceToken" = "Ошибка получения токена доступа";
+"kDone" = "Готово";

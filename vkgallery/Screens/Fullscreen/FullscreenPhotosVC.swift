@@ -125,16 +125,19 @@ final class FullscreenPhotosVC: UIViewController {
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityController.completionWithItemsHandler = { [weak self] activity, success, items, error in
             if let error = error {
-                self?.showAlertWith(title: "Share error", message: error.localizedDescription)
+                self?.showAlertWith(title: error.localizedDescription, message: nil)
                 return
             }
             
-            self?.showAlertWith(title: "Done", message: "Shared successful")
+            if let activity = activity {
+                self?.showAlertWith(title: NSLocalizedString(LocalizedStringKeys.kDone, comment: "Готово"), message: nil)
+            }
         }
+        
         present(activityController, animated: true)
     }
     
-    private func showAlertWith(title: String, message: String){
+    private func showAlertWith(title: String, message: String?) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)

@@ -62,8 +62,8 @@ extension SceneDelegate: AuthServiceDelegate {
         window?.rootViewController = navigationController
     }
     
-    func authServiceSignInDidFail() {
-
+    func authServiceSignInDidFail(errorMessage: String) {
+        #warning("Добавить вывод ошибки")
     }
     
     func authServiceNeedCaptcha(error: VKError) {

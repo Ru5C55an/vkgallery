@@ -29,47 +29,42 @@ class BaseAPI {
             .responseJSON { response in
                 print("JSON Status: \(String(describing: response.response?.statusCode)), Response:", response)
                 
-                guard response.response?.statusCode != 429 else {
-                    let error = NetworkError(.other("Слишком много запросов"), code: response.response?.statusCode)
+                if let error = response.error {
+                    let error = NetworkError(.other(error.localizedDescription), code: response.response?.statusCode)
                     failure(error)
                     return
                 }
                 
-                guard response.response?.statusCode != 500, response.response?.statusCode != 405 else {
+                guard response.response?.statusCode != 429 else {
+                    let error = NetworkError(.other(NSLocalizedString(LocalizedStringKeys.kManyRequestsError, comment: "Слишком много запросов")), code: response.response?.statusCode)
+                    failure(error)
+                    return
+                }
+                
+                guard response.response?.statusCode != 500, response.response?.statusCode != 405, response.response?.statusCode != 404 else {
                     failure(NetworkError(.server, code: response.response?.statusCode))
                     return
                 }
                 
                 guard response.response?.statusCode != -1001 else {
-                    let error = NetworkError(.other("Превышено время ожидания"), code: -1001)
+                    let error = NetworkError(.other(NSLocalizedString(LocalizedStringKeys.kTimeoutError, comment: "Превышено время ожидания")), code: -1001)
                     failure(error)
                     return
                 }
                 
                 guard response.response?.statusCode != 403 else {
-                    let error = NetworkError(.other("Ошибка авторизации"), code: 403)
-                    failure(error)
-                    return
-                }
-                
-                guard response.response?.statusCode != 404 else {
-                    let error = NetworkError(.other("Ошибка 404"), code: 404)
+                    let error = NetworkError(.other(NSLocalizedString(LocalizedStringKeys.kAuthError, comment: "Ошибка авторизации")), code: 403)
                     failure(error)
                     return
                 }
                 
                 guard response.response?.statusCode != 503 else {
-                    let error = NetworkError(.other("Сервис временно недоступен, попробуйте повторить запрос позже"), code: 503)
+                    let error = NetworkError(.other(NSLocalizedString(LocalizedStringKeys.kServiceUnavailable, comment: "Сервис временно недоступен, попробуйте позже")), code: 503)
                     failure(error)
                     return
                 }
                 
                 if let data = response.data {
-                    if response.response?.statusCode == 429 {
-                        let error = NetworkError(.other("Слишком много запросов"), code: response.response?.statusCode)
-                        failure(error)
-                        return
-                    }
                     success(data)
                 } else {
                     if response.response?.statusCode == 200 {
@@ -85,7 +80,7 @@ class BaseAPI {
     static func authorizedGetRequest(endPoint: String, parameters: [String: Any]?, success: @escaping (Data?) -> Void, failure: @escaping (NetworkError?) -> Void) {
 
         guard let token = AuthService.shared.token else {
-            failure(NetworkError(.other("Error get token from AuthService")))
+            failure(NetworkError(.other(NSLocalizedString(LocalizedStringKeys.kErrorAuthServiceToken, comment: "Ошибка получения токена доступа"))))
             return
         }
         var parameters = parameters

@@ -16,7 +16,7 @@ final class FeedVC: UIViewController {
         static let albumId = "266276915"
         
         static let navTitle = "Mobile Up Gallery"
-        static let exitButtonTitle = "Выход"
+        static let exitButtonTitle = NSLocalizedString(LocalizedStringKeys.kExitBtnTitle, comment: "Выход")
         static let itemsPerRow: CGFloat = 2
         static let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         static let itemSpacing: CGFloat = 2
@@ -46,8 +46,6 @@ final class FeedVC: UIViewController {
         getPhotos()
         setupViews()
         setupConstraints()
-        
-        print("asiodjaoisdja: ", navigationController?.navigationBar.frame.size.height)
     }
     
     // MARK: - Get photos

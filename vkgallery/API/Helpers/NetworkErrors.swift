@@ -25,8 +25,8 @@ extension NetworkError {
         self.code = code
         
         switch type {
-            case .server: message = "Ошибка сервера: \(code ?? 0)"
-            case .decoding: message = "Ошибка декодинга"
+        case .server: message = "\(NSLocalizedString(LocalizedStringKeys.kServerError, comment: "Ошибка сервера")): \(code ?? 0)"
+        case .decoding: message = NSLocalizedString(LocalizedStringKeys.kDecodingError, comment: "Ошибка декодинга")
             case .other(let text): message = text
         }
     }

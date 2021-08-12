@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  vkgallery
+
+  Created by Руслан Садыков on 12.08.2021.
+  
+*/
+
+"kAuthTitle" = "Login with VK";
+"kExitBtnTitle" = "Exit";
+"kDefaultAuthError" = "Authorization status check returned unknown status";
+"kCheckStatusError" = "Unknown error while checking the authorization status";
+"kDecodingError" = "Decoding error";
+"kServerError" = "Server error";
+"kManyRequestsError" = "Too many requests";
+"kTimeoutError" = "Timeout exceeded";
+"kAuthError" = "Authorisation error";
+"kServiceUnavailable" = "The service is temporarily unavailable, please try again later";
+"kErrorAuthServiceToken" = "Error getting access token";
+"kDone" = "Done";

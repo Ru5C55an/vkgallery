@@ -15,7 +15,7 @@ final class AuthVC: UIViewController {
         static let titleLabelFont: UIFont? = .sfProDisplay(ofSize: 48, weight: .bold)
         static let titleLabelColor: UIColor = .primaryColor
         
-        static let authBtnTitle = "Вход через VK"
+        static let authBtnTitle = NSLocalizedString(LocalizedStringKeys.kAuthTitle, comment: "Вход через VK")
         static let authBtnFont: UIFont? = .sfProDisplay(ofSize: 18, weight: .medium)
         static let authBtnBgColor: UIColor = .primaryColor
         static let authBtnTitleColor: UIColor = .btnTitleColor

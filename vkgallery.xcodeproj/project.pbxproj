@@ -39,6 +39,8 @@
 		44F1C94626C46B2400E85484 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94526C46B2400E85484 /* UIImageView + Extension.swift */; };
 		44F1C94826C46CB300E85484 /* DateFormatter + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94726C46CB300E85484 /* DateFormatter + Extension.swift */; };
 		44F1C94B26C4846700E85484 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94A26C4846700E85484 /* ImageScrollView.swift */; };
+		44F1C94F26C5A5F600E85484 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44F1C95126C5A5F600E85484 /* Localizable.strings */; };
+		44F1C95526C5A69900E85484 /* LocalizedStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,10 @@
 		44F1C94526C46B2400E85484 /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
 		44F1C94726C46CB300E85484 /* DateFormatter + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + Extension.swift"; sourceTree = "<group>"; };
 		44F1C94A26C4846700E85484 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		44F1C94C26C5A41600E85484 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		44F1C95026C5A5F600E85484 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44F1C95226C5A5FA00E85484 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringKeys.swift; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,6 +153,7 @@
 		44ED236526C1DF6800649CEB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				44F1C95326C5A67E00E85484 /* Localizations */,
 				44ED23A226C331D900649CEB /* Lotties */,
 				44ED236626C1DF7300649CEB /* Fonts */,
 				44ED235726C1C77F00649CEB /* Assets.xcassets */,
@@ -294,6 +301,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		44F1C95326C5A67E00E85484 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				44F1C95126C5A5F600E85484 /* Localizable.strings */,
+				44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +361,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 44ED234226C1C77C00649CEB;
 			productRefGroup = 44ED234C26C1C77C00649CEB /* Products */;
@@ -364,6 +381,7 @@
 				44ED236A26C1DFAD00649CEB /* SF-Pro-Display-Semibold.otf in Resources */,
 				44ED236C26C1DFCC00649CEB /* SF-Pro-Display-Bold.otf in Resources */,
 				44ED23A126C331D500649CEB /* ImageLoading.json in Resources */,
+				44F1C94F26C5A5F600E85484 /* Localizable.strings in Resources */,
 				44ED236926C1DFAD00649CEB /* SF-Pro-Display-Medium.otf in Resources */,
 				44ED235B26C1C77F00649CEB /* LaunchScreen.storyboard in Resources */,
 				44ED235826C1C77F00649CEB /* Assets.xcassets in Resources */,
@@ -435,6 +453,7 @@
 				44ED238426C2EEE300649CEB /* GetPhotoRequest.swift in Sources */,
 				44ED239B26C3125200649CEB /* UICollectionView + Extension.swift in Sources */,
 				44ED239626C30D0600649CEB /* UINavigationBar + Extension.swift in Sources */,
+				44F1C95526C5A69900E85484 /* LocalizedStringKeys.swift in Sources */,
 				44ED239926C3123800649CEB /* PhotoCell.swift in Sources */,
 				44F1C94B26C4846700E85484 /* ImageScrollView.swift in Sources */,
 				44ED236326C1CB5E00649CEB /* AuthService.swift in Sources */,
@@ -454,8 +473,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				44ED235A26C1C77F00649CEB /* Base */,
+				44F1C94C26C5A41600E85484 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		44F1C95126C5A5F600E85484 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44F1C95026C5A5F600E85484 /* en */,
+				44F1C95226C5A5FA00E85484 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -465,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -526,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

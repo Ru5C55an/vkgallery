@@ -11,7 +11,7 @@ import VK_ios_sdk
 protocol AuthServiceDelegate: AnyObject {
     func authServiceShouldShow(viewController: UIViewController)
     func authServiceSignIn()
-    func authServiceSignInDidFail()
+    func authServiceSignInDidFail(errorMessage: String)
     func authServiceLogout()
     func authServiceNeedCaptcha(error: VKError)
 }
@@ -62,9 +62,10 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
                 }
             case .error:
                 print(error?.localizedDescription ?? "ERROR_LOG Unknown error while checking the authorization status")
+                delegate?.authServiceSignInDidFail(errorMessage: error?.localizedDescription ?? NSLocalizedString(LocalizedStringKeys.kCheckStatusError, comment: "Неизвестная ошибка при проверке статуса авторизации"))
             default:
-                delegate?.authServiceSignInDidFail()
                 print(error?.localizedDescription ?? "ERROR_LOG Unknown error while checking the authorization status")
+                delegate?.authServiceSignInDidFail(errorMessage: error?.localizedDescription ?? NSLocalizedString(LocalizedStringKeys.kDefaultAuthError, comment: "Проверка статуса авторизации вернула неизвестный статус"))
             }
         }
     }
@@ -83,7 +84,7 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     }
     
     func vkSdkUserAuthorizationFailed() {
-        delegate?.authServiceSignInDidFail()
+        delegate?.authServiceSignInDidFail(errorMessage: NSLocalizedString(LocalizedStringKeys.kCheckStatusError, comment: "Неизвестная ошибка при проверке статуса авторизации"))
     }
     
     func vkSdkShouldPresent(_ controller: UIViewController!) {
