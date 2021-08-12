@@ -16,7 +16,7 @@ enum NetworkErrorType {
 struct NetworkError: Error {
     let type: NetworkErrorType
     let code: Int?
-    let message: String?
+    let message: String
 }
 
 extension NetworkError {

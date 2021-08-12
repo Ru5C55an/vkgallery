@@ -24,7 +24,7 @@ class RequestDecoder {
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(StatusMessage.self, from: data, keyedBy: nil)
-            completion(.failure(NetworkError(type: .server, code: result.error?.errorCode, message: result.error?.errorMsg)))
+            completion(.failure(NetworkError(type: .server, code: result.error?.errorCode, message: result.error?.errorMsg ?? NSLocalizedString(LocalizedStringKeys.kUnknownError, comment: "Неизвестная ошибка"))))
         } catch let error {
             print("Error parse error:", error)
             completion(.failure(NetworkError(.decoding)))

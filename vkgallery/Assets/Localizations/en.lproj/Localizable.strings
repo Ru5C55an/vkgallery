@@ -7,7 +7,7 @@
 */
 
 "kAuthTitle" = "Login with VK";
-"kExitBtnTitle" = "Exit";
+"kExit" = "Exit";
 "kDefaultAuthError" = "Authorization status check returned unknown status";
 "kCheckStatusError" = "Unknown error while checking the authorization status";
 "kDecodingError" = "Decoding error";
@@ -18,3 +18,7 @@
 "kServiceUnavailable" = "The service is temporarily unavailable, please try again later";
 "kErrorAuthServiceToken" = "Error getting access token";
 "kDone" = "Done";
+"kUnknownError" = "Unknown error";
+"kAreYouSure" = "Are you sure?";
+"kYes" = "Yes";
+"kCancel" = "Cancel";

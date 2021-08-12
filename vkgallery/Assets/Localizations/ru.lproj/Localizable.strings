@@ -7,7 +7,7 @@
 */
 
 "kAuthTitle" = "Вход через ВК";
-"kExitBtnTitle" = "Выход";
+"kExit" = "Выход";
 "kDefaultAuthError" = "Проверка статуса авторизации вернула неизвестный статус";
 "kCheckStatusError" = "Неизвестная ошибка при проверке статуса авторизации";
 "kDecodingError" = "Ошибка декодинга";
@@ -18,3 +18,7 @@
 "kServiceUnavailable" = "Сервис временно недоступен, попробуйте позже";
 "kErrorAuthServiceToken" = "Ошибка получения токена доступа";
 "kDone" = "Готово";
+"kUnknownError" = "Неизвестная ошибка";
+"kAreYouSure" = "Вы уверены?";
+"kYes" = "Да";
+"kCancel" = "Отмена";

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SPAlert
 
 final class FullscreenPhotosVC: UIViewController {
     
@@ -102,12 +103,15 @@ final class FullscreenPhotosVC: UIViewController {
     }
     
     private func setImageFor(url: URL) {
-        KingfisherManager.shared.retrieveImage(with: url) { result in
+        KingfisherManager.shared.retrieveImage(with: url) { [weak self] result in
             switch result {
             
             case .success(let retrieveImageResult):
-                self.imageScrollView.set(image: retrieveImageResult.image)
+                self?.imageScrollView.set(image: retrieveImageResult.image)
             case .failure(let error):
+                let alertView = SPAlertView(title: error.localizedDescription, preset: .error)
+                alertView.dismissByTap = true
+                alertView.present(duration: 5, haptic: .error, completion: nil)
                 print("ERROR_LOG Error get image for url \(url): ", error.localizedDescription)
             }
         }
@@ -123,24 +127,20 @@ final class FullscreenPhotosVC: UIViewController {
         
         let items = [image]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityController.completionWithItemsHandler = { [weak self] activity, success, items, error in
+        activityController.completionWithItemsHandler = { activity, success, items, error in
             if let error = error {
-                self?.showAlertWith(title: error.localizedDescription, message: nil)
+                let alertView = SPAlertView(title: error.localizedDescription, preset: .error)
+                alertView.dismissByTap = true
+                alertView.present(duration: 5, haptic: .error, completion: nil)
                 return
             }
             
-            if let activity = activity {
-                self?.showAlertWith(title: NSLocalizedString(LocalizedStringKeys.kDone, comment: "Готово"), message: nil)
+            if let _ = activity {
+                SPAlert.present(title: NSLocalizedString(LocalizedStringKeys.kDone, comment: "Готово"), preset: .done)
             }
         }
         
         present(activityController, animated: true)
-    }
-    
-    private func showAlertWith(title: String, message: String?) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
     }
 }
 

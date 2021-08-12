@@ -9,7 +9,7 @@ import Foundation
 
 enum LocalizedStringKeys {
     static let kAuthTitle = "kAuthTitle"
-    static let kExitBtnTitle = "kExitBtnTitle"
+    static let kExit = "kExit"
     static let kDefaultAuthError = "kDefaultAuthError"
     static let kCheckStatusError = "kCheckStatusError"
     static let kDecodingError = "kDecodingError"
@@ -20,4 +20,8 @@ enum LocalizedStringKeys {
     static let kServiceUnavailable = "kServiceUnavailable"
     static let kErrorAuthServiceToken = "kErrorAuthServiceToken"
     static let kDone = "kDone"
+    static let kUnknownError = "kUnknownError"
+    static let kAreYouSure = "kAreYouSure"
+    static let kYes = "kYes"
+    static let kCancel = "kCancel"
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SPAlert
 
 final class FeedVC: UIViewController {
     
@@ -16,7 +17,7 @@ final class FeedVC: UIViewController {
         static let albumId = "266276915"
         
         static let navTitle = "Mobile Up Gallery"
-        static let exitButtonTitle = NSLocalizedString(LocalizedStringKeys.kExitBtnTitle, comment: "Выход")
+        static let exitButtonTitle = NSLocalizedString(LocalizedStringKeys.kExit, comment: "Выход")
         static let itemsPerRow: CGFloat = 2
         static let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         static let itemSpacing: CGFloat = 2
@@ -60,6 +61,9 @@ final class FeedVC: UIViewController {
                 self?.photos = response.response.items
                 self?.collectionView.reloadData()
             case .failure(let error):
+                let alertView = SPAlertView(title: error.message, preset: .error)
+                alertView.dismissByTap = true
+                alertView.present(duration: 5, haptic: .error, completion: nil)
                 print("ERROR_LOG Error get photos from album user: ", error.message)
             }
         }
@@ -87,8 +91,14 @@ final class FeedVC: UIViewController {
     
     // MARK: - Handlers
     @objc private func exitAction() {
-        authService.logout()
-        
+        let alertController = UIAlertController(title: NSLocalizedString(LocalizedStringKeys.kExit, comment: "Выход"), message: NSLocalizedString(LocalizedStringKeys.kAreYouSure, comment: "Вы уверены?"), preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: NSLocalizedString(LocalizedStringKeys.kYes, comment: "Да"), style: .destructive) { [weak self] _ in
+            self?.authService.logout()
+        }
+        let cancleAciton = UIAlertAction(title: NSLocalizedString(LocalizedStringKeys.kCancel, comment: "Отмена"), style: .cancel, handler: nil)
+        alertController.addAction(yesAction)
+        alertController.addAction(cancleAciton)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -145,5 +155,3 @@ extension FeedVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: size, height: size)
     }
 }
-
-

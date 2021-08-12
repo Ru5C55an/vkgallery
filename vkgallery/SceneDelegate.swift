@@ -7,6 +7,7 @@
 
 import UIKit
 import VK_ios_sdk
+import SPAlert
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -63,12 +64,15 @@ extension SceneDelegate: AuthServiceDelegate {
     }
     
     func authServiceSignInDidFail(errorMessage: String) {
-        #warning("Добавить вывод ошибки")
+        let captchaVC = VKCaptchaViewController()
+        captchaVC.present(in: window?.rootViewController)
     }
     
     func authServiceNeedCaptcha(error: VKError) {
-        let captchaVC = VKCaptchaViewController()
-        captchaVC.present(in: window?.rootViewController)
+        let errorAlert = SPAlertView(title: error.errorMessage, preset: .error)
+        errorAlert.dismissByTap = true
+        errorAlert.presentWindow = window
+        errorAlert.present(duration: 5, haptic: .error, completion: nil)
     }
     
     func authServiceLogout() {
