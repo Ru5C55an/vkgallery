@@ -77,7 +77,7 @@ final class FullscreenPhotosVC: UIViewController {
         setupViews()
         setupConstraints()
         prevIndex = indexForSelectedImage ?? 0
-        DispatchQueue.main.async {
+        DispatchQueue.main.async() {
             self.fullscreenPhotosCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
             self.collectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
         }
@@ -127,9 +127,11 @@ final class FullscreenPhotosVC: UIViewController {
     }
     
     private func setImageFor(imageScrollView: ImageScrollView, url: URL, completion: ((UIImage) -> Void)? = nil) {
-        getImage(by: url) { image in
-            completion?(image)
-            imageScrollView.set(image: image)
+        DispatchQueue.main.async { [weak self] in
+            self?.getImage(by: url) { image in
+                completion?(image)
+                imageScrollView.set(image: image)
+            }
         }
     }
     

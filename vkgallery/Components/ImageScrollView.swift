@@ -73,10 +73,14 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         if minScale != 0 {
             self.minimumZoomScale = minScale
+        } else {
+            print("ERROR_LOG min scale is 0")
         }
         
         if maxScale != 0 {
             self.maximumZoomScale = maxScale
+        } else {
+            print("ERROR_LOG max scale is 0")
         }
     }
     
