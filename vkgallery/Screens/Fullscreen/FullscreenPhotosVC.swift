@@ -18,6 +18,20 @@ final class FullscreenPhotosVC: UIViewController {
     }
     
     // MARK: - UI Elements
+    private lazy var fullscreenPhotosCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(ZommablePhotoCell.self, forCellWithReuseIdentifier: ZommablePhotoCell.reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = true
+        return collectionView
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = Constants.itemSpacing
@@ -31,19 +45,23 @@ final class FullscreenPhotosVC: UIViewController {
         return collectionView
     }()
     
-    private let imageScrollView = ImageScrollView()
-    
     // MARK: - Haptic feedback
     private let generator = UIImpactFeedbackGenerator(style: .light)
     
     // MARK: - Properties
     private let images: [PhotoModel]
     private var selectedImage: PhotoModel
+    private var imageForShare: UIImage? = nil
+    private let indexForSelectedImage: Int?
+    private var prevIndex = 0
     
     // MARK: - Init
     init(images: [PhotoModel], selectedImage: PhotoModel) {
         self.images = images
         self.selectedImage = selectedImage
+        self.indexForSelectedImage = images.firstIndex(where: { photo in
+            photo.id == selectedImage.id
+        })
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -58,9 +76,15 @@ final class FullscreenPhotosVC: UIViewController {
         setupNavBar()
         setupViews()
         setupConstraints()
-
-        let image = selectedImage.sizes.last!
-        setImageFor(url: image.url)
+        prevIndex = indexForSelectedImage ?? 0
+        DispatchQueue.main.async {
+            self.fullscreenPhotosCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+            self.collectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    deinit {
+        print("Deinitialized ", FullscreenPhotosVC.self)
     }
     
     // MARK: - setupNavBar
@@ -76,13 +100,13 @@ final class FullscreenPhotosVC: UIViewController {
     // MARK: - Setup views
     private func setupViews() {
         view.backgroundColor = .systemBackground
-        view.addSubview(imageScrollView)
         view.addSubview(collectionView)
+        view.addSubview(fullscreenPhotosCollectionView)
     }
     
     // MARK: - Setup constraints
     private func setupConstraints() {
-        imageScrollView.snp.makeConstraints { make in
+        fullscreenPhotosCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(collectionView.snp.top)
@@ -102,12 +126,19 @@ final class FullscreenPhotosVC: UIViewController {
         navigationItem.title = dateString
     }
     
-    private func setImageFor(url: URL) {
-        KingfisherManager.shared.retrieveImage(with: url) { [weak self] result in
+    private func setImageFor(imageScrollView: ImageScrollView, url: URL, completion: ((UIImage) -> Void)? = nil) {
+        getImage(by: url) { image in
+            completion?(image)
+            imageScrollView.set(image: image)
+        }
+    }
+    
+    private func getImage(by url: URL, completion: @escaping ((UIImage) -> Void)) {
+        KingfisherManager.shared.retrieveImage(with: url) { result in
             switch result {
             
             case .success(let retrieveImageResult):
-                self?.imageScrollView.set(image: retrieveImageResult.image)
+                completion(retrieveImageResult.image)
             case .failure(let error):
                 let alertView = SPAlertView(title: error.localizedDescription, preset: .error)
                 alertView.dismissByTap = true
@@ -117,11 +148,10 @@ final class FullscreenPhotosVC: UIViewController {
         }
     }
     
-    
     // MARK: - Handlers
     @objc private func shareAction() {
-        guard let image = imageScrollView.imageZoomView.image else {
-            print("ERROR_LOG Error get image from image scroll view")
+        guard let image = imageForShare else {
+            print("ERROR_LOG Error get image in share action")
             return
         }
         
@@ -155,10 +185,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseIdentifier, for: indexPath as IndexPath) as? PhotoCell
-        else {
-            print("ERROR_LOG Error get PhotoCell for index path \(indexPath)")
-            return UICollectionViewCell() }
+        
         guard let photo = images[indexPath.row].sizes.last else {
             print("ERROR_LOG Error get photo for index path \(indexPath)")
             return UICollectionViewCell()
@@ -166,20 +193,69 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
         
         let imageUrl = photo.url
         let imageSize = CGSize(width: photo.width, height: photo.height)
+        
+        if collectionView == fullscreenPhotosCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZommablePhotoCell.reuseIdentifier, for: indexPath as IndexPath) as? ZommablePhotoCell
+            else {
+                print("ERROR_LOG Error get ZommablePhotoCell for index path \(indexPath)")
+                return UICollectionViewCell()
+            }
+            
+            setImageFor(imageScrollView: cell.imageScrollView, url: imageUrl)
+            
+            // Syncronize two collection view logic
+            var index = indexPath.row
+            if abs(prevIndex - indexPath.row) == 3 {
+                if prevIndex - indexPath.row == -3 {
+                    index -= 1
+                } else {
+                    index += 1
+                }
+            } else if abs(prevIndex - indexPath.row) == 2 {
+                index -= 1
+            } else {
+                if prevIndex - indexPath.row == -1 {
+                    index -= 1
+                } else {
+                    index += 1
+                }
+            }
+            self.collectionView.scrollToItem(at: [indexPath.section, index], at: .centeredHorizontally, animated: true)
+            prevIndex = indexPath.row
+            
+            if let image = (collectionView.cellForItem(at: [indexPath.section, index]) as? ZommablePhotoCell)?.image {
+                imageForShare = image
+            } else {
+                print("ERROR_LOG Error get image from ZommablePhotoCell by indexPath \(indexPath)")
+            }
+            
+            return cell
+        }
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseIdentifier, for: indexPath as IndexPath) as? PhotoCell
+        else {
+            print("ERROR_LOG Error get PhotoCell for index path \(indexPath)")
+            return UICollectionViewCell()
+        }
+    
         cell.imageView.setImage(imageUrl: imageUrl, size: imageSize)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let image = images[indexPath.row]
-        guard let imageSize = image.sizes.last else {
-            print("ERROR_LOG Error get image for indexPath \(indexPath)")
+        guard selectedImage.id != image.id else {
+            print("Is already selected")
             return
         }
+
+        selectedImage = image
+        
         generator.prepare()
         generator.impactOccurred()
         
-        setImageFor(url: imageSize.url)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        fullscreenPhotosCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         setTitleWith(timeInterval: image.date)
     }
 }
@@ -196,6 +272,9 @@ extension FullscreenPhotosVC: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
                 
+        if collectionView == fullscreenPhotosCollectionView {
+            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+        }
         return CGSize(width: collectionView.frame.size.height, height: collectionView.frame.size.height)
     }
 }

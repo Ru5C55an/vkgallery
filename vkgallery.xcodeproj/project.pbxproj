@@ -41,6 +41,7 @@
 		44F1C94B26C4846700E85484 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C94A26C4846700E85484 /* ImageScrollView.swift */; };
 		44F1C94F26C5A5F600E85484 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44F1C95126C5A5F600E85484 /* Localizable.strings */; };
 		44F1C95526C5A69900E85484 /* LocalizedStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */; };
+		44F1C95826C5CDF900E85484 /* ZommablePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F1C95726C5CDF800E85484 /* ZommablePhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		44F1C95026C5A5F600E85484 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44F1C95226C5A5FA00E85484 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringKeys.swift; sourceTree = "<group>"; };
+		44F1C95726C5CDF800E85484 /* ZommablePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZommablePhotoCell.swift; sourceTree = "<group>"; };
 		A36002B5CDBA2FA905127168 /* Pods-vkgallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkgallery.debug.xcconfig"; path = "Target Support Files/Pods-vkgallery/Pods-vkgallery.debug.xcconfig"; sourceTree = "<group>"; };
 		DDC607C16EF000EA0E2CA28B /* Pods_vkgallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkgallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -288,6 +290,7 @@
 		44F1C94226C43D3D00E85484 /* Fullscreen */ = {
 			isa = PBXGroup;
 			children = (
+				44F1C95626C5CDE400E85484 /* Views */,
 				44F1C94326C43D6800E85484 /* FullscreenPhotosVC.swift */,
 			);
 			path = Fullscreen;
@@ -308,6 +311,14 @@
 				44F1C95426C5A69900E85484 /* LocalizedStringKeys.swift */,
 			);
 			path = Localizations;
+			sourceTree = "<group>";
+		};
+		44F1C95626C5CDE400E85484 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44F1C95726C5CDF800E85484 /* ZommablePhotoCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B2402D62A246460C3A4B9C38 /* Frameworks */ = {
@@ -443,6 +454,7 @@
 				44ED237526C1EDAA00649CEB /* FeedVC.swift in Sources */,
 				44F1C94826C46CB300E85484 /* DateFormatter + Extension.swift in Sources */,
 				44ED236F26C1E05900649CEB /* UIFont + Extension.swift in Sources */,
+				44F1C95826C5CDF900E85484 /* ZommablePhotoCell.swift in Sources */,
 				44ED238C26C2F53600649CEB /* JsonDecodeExtensions.swift in Sources */,
 				44ED239F26C32E2100649CEB /* PhotoLoadingIndicator.swift in Sources */,
 				44ED235326C1C77C00649CEB /* AuthVC.swift in Sources */,

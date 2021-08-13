@@ -47,14 +47,6 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
             case .initialized:
                 print("Initialized")
                 VKSdk.authorize(scope)
-            case .pending:
-                break
-            case .external:
-                break
-            case .safariInApp:
-                break
-            case .webview:
-                break
             case .authorized:
                 print("Authorized")
                 if isNeedRoute {
@@ -70,6 +62,24 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
         }
     }
     
+    func checkAuth(completion: @escaping ((Bool) -> Void)) {
+        let scope = ["offline"]
+        VKSdk.wakeUpSession(scope) { state, error in
+            switch state {
+            
+            case .authorized:
+                print("Authorized")
+                completion(true)
+            case .error:
+                completion(false)
+                print(error?.localizedDescription ?? "ERROR_LOG Unknown error while checking the authorization status")
+            default:
+                completion(false)
+                print(error?.localizedDescription ?? "ERROR_LOG Not authorized")
+            }
+        }
+    }
+    
     func logout() {
         VKSdk.forceLogout()
         delegate?.authServiceLogout()
@@ -80,6 +90,7 @@ final class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
             delegate?.authServiceSignIn()
         } else if let error = result.error  {
             print("ERROR_LOG Error auth: ", error.localizedDescription)
+            delegate?.authServiceSignInDidFail(errorMessage: error.localizedDescription)
         }
     }
     

@@ -13,14 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-//    static func shared() -> SceneDelegate {
-//        let scene = UIApplication.shared.connectedScenes.first
-//        let sceneDelegate: SceneDelegate = scene?.delegate as! SceneDelegate
-//        return sceneDelegate
-//    }
-
-    let authVC = AuthVC()
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -30,15 +22,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowsScene
         AuthService.shared.delegate = self
         
-        if AuthService.shared.token != nil {
-            print("asdjasdoiajsdiasdj")
-            let feedVC = FeedVC()
-            let navigationController = UINavigationController(rootViewController: feedVC)
-            navigationController.navigationBar.setupNavigationBarAppearance()
-            window?.rootViewController = navigationController
-        } else {
-            window?.rootViewController = authVC
-        }
+        AuthService.shared.checkAuth(completion: { [window] isAuthentificated in
+            if isAuthentificated {
+                let feedVC = FeedVC()
+                let navigationController = UINavigationController(rootViewController: feedVC)
+                navigationController.navigationBar.setupNavigationBarAppearance()
+                window?.rootViewController = navigationController
+            } else {
+                let authVC = AuthVC()
+                window?.rootViewController = authVC
+            }
+        })
         
         window?.makeKeyAndVisible()
     }
@@ -65,18 +59,19 @@ extension SceneDelegate: AuthServiceDelegate {
     }
     
     func authServiceSignInDidFail(errorMessage: String) {
-        let captchaVC = VKCaptchaViewController()
-        captchaVC.present(in: window?.rootViewController)
-    }
-    
-    func authServiceNeedCaptcha(error: VKError) {
-        let errorAlert = SPAlertView(title: error.errorMessage, preset: .error)
+        let errorAlert = SPAlertView(title: errorMessage, preset: .error)
         errorAlert.dismissByTap = true
         errorAlert.presentWindow = window
         errorAlert.present(duration: 5, haptic: .error, completion: nil)
     }
     
+    func authServiceNeedCaptcha(error: VKError) {
+        let captchaVC = VKCaptchaViewController()
+        captchaVC.present(in: window?.rootViewController)
+    }
+    
     func authServiceLogout() {
+        let authVC = AuthVC()
         window?.rootViewController = authVC
     }
 }

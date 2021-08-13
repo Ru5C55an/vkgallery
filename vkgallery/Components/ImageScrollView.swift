@@ -71,8 +71,13 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             maxScale = max(1.0,minScale)
         }
         
-        self.minimumZoomScale = minScale
-        self.maximumZoomScale = maxScale
+        if minScale != 0 {
+            self.minimumZoomScale = minScale
+        }
+        
+        if maxScale != 0 {
+            self.maximumZoomScale = maxScale
+        }
     }
     
     func centerImage() {
@@ -93,7 +98,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         imageZoomView?.frame = frameToCenter
     }
-    
     
     // MARK: - Double tap gesture
     @objc private func handleZoomingTap(_ sender: UITapGestureRecognizer) {
@@ -133,7 +137,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageZoomView
     }
-    
+
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         self.centerImage()
     }

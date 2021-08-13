@@ -54,6 +54,10 @@ final class AuthVC: UIViewController {
         setupConstrsints()
     }
     
+    deinit {
+        print("Deinitialized AuthVC")
+    }
+    
     // MARK: - Setup views
     private func setupViews() {
         view.backgroundColor = .systemBackground

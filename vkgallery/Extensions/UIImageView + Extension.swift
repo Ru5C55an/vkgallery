@@ -19,7 +19,7 @@ extension UIImageView {
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
-                .cacheOriginalImage
+                .cacheOriginalImage,
             ],
             progressBlock: { receivedSize, totalSize in
                 let percentage = CGFloat(receivedSize) / CGFloat(totalSize)
