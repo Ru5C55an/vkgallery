@@ -18,7 +18,7 @@ final class FullscreenPhotosVC: UIViewController {
     }
     
     // MARK: - UI Elements
-    private lazy var fullscreenPhotosCollectionView: UICollectionView = {
+    private lazy var fullscreenImagesCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.scrollDirection = .horizontal
@@ -77,8 +77,8 @@ final class FullscreenPhotosVC: UIViewController {
         setupViews()
         setupConstraints()
         prevIndex = indexForSelectedImage ?? 0
-        DispatchQueue.main.async() {
-            self.fullscreenPhotosCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+        DispatchQueue.main.async {
+            self.fullscreenImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
             self.collectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
         }
     }
@@ -101,12 +101,12 @@ final class FullscreenPhotosVC: UIViewController {
     private func setupViews() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
-        view.addSubview(fullscreenPhotosCollectionView)
+        view.addSubview(fullscreenImagesCollectionView)
     }
     
     // MARK: - Setup constraints
     private func setupConstraints() {
-        fullscreenPhotosCollectionView.snp.makeConstraints { make in
+        fullscreenImagesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(collectionView.snp.top)
@@ -196,7 +196,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
         let imageUrl = photo.url
         let imageSize = CGSize(width: photo.width, height: photo.height)
         
-        if collectionView == fullscreenPhotosCollectionView {
+        if collectionView == fullscreenImagesCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZommablePhotoCell.reuseIdentifier, for: indexPath as IndexPath) as? ZommablePhotoCell
             else {
                 print("ERROR_LOG Error get ZommablePhotoCell for index path \(indexPath)")
@@ -245,6 +245,9 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard collectionView == self.collectionView else { return }
+        
         let image = images[indexPath.row]
         guard selectedImage.id != image.id else {
             print("Is already selected")
@@ -257,7 +260,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
         generator.impactOccurred()
         
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        fullscreenPhotosCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        fullscreenImagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         setTitleWith(timeInterval: image.date)
     }
 }
@@ -274,7 +277,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
                 
-        if collectionView == fullscreenPhotosCollectionView {
+        if collectionView == fullscreenImagesCollectionView {
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
         }
         return CGSize(width: collectionView.frame.size.height, height: collectionView.frame.size.height)
