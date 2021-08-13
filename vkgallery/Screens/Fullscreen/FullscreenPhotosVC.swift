@@ -32,7 +32,7 @@ final class FullscreenPhotosVC: UIViewController {
         return collectionView
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    private lazy var smallImagesCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = Constants.itemSpacing
         flowLayout.scrollDirection = .horizontal
@@ -51,7 +51,6 @@ final class FullscreenPhotosVC: UIViewController {
     // MARK: - Properties
     private let images: [PhotoModel]
     private var selectedImage: PhotoModel
-    private var imageForShare: UIImage? = nil
     private let indexForSelectedImage: Int?
     private var prevIndex = 0
     
@@ -79,7 +78,7 @@ final class FullscreenPhotosVC: UIViewController {
         prevIndex = indexForSelectedImage ?? 0
         DispatchQueue.main.async {
             self.fullscreenImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
-            self.collectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+            self.smallImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
         }
     }
     
@@ -100,7 +99,7 @@ final class FullscreenPhotosVC: UIViewController {
     // MARK: - Setup views
     private func setupViews() {
         view.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
+        view.addSubview(smallImagesCollectionView)
         view.addSubview(fullscreenImagesCollectionView)
     }
     
@@ -109,10 +108,10 @@ final class FullscreenPhotosVC: UIViewController {
         fullscreenImagesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(collectionView.snp.top)
+            make.bottom.equalTo(smallImagesCollectionView.snp.top)
         }
         
-        collectionView.snp.makeConstraints { make in
+        smallImagesCollectionView.snp.makeConstraints { make in
             make.height.equalTo(56)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
@@ -152,11 +151,11 @@ final class FullscreenPhotosVC: UIViewController {
     
     // MARK: - Handlers
     @objc private func shareAction() {
-        guard let image = imageForShare else {
+        guard let cell = fullscreenImagesCollectionView.visibleCells.first, let image = (cell as? ZommablePhotoCell)?.image else {
             print("ERROR_LOG Error get image in share action")
             return
         }
-        
+
         let items = [image]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
@@ -222,14 +221,8 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
                     index += 1
                 }
             }
-            self.collectionView.scrollToItem(at: [indexPath.section, index], at: .centeredHorizontally, animated: true)
+            smallImagesCollectionView.scrollToItem(at: [indexPath.section, index], at: .centeredHorizontally, animated: true)
             prevIndex = indexPath.row
-            
-            if let image = (collectionView.cellForItem(at: [indexPath.section, index]) as? ZommablePhotoCell)?.image {
-                imageForShare = image
-            } else {
-                print("ERROR_LOG Error get image from ZommablePhotoCell by indexPath \(indexPath)")
-            }
             
             return cell
         }
@@ -246,7 +239,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard collectionView == self.collectionView else { return }
+        guard collectionView == smallImagesCollectionView else { return }
         
         let image = images[indexPath.row]
         guard selectedImage.id != image.id else {

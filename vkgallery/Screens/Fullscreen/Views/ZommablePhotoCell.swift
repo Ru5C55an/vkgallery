@@ -13,7 +13,7 @@ class ZommablePhotoCell: UICollectionViewCell {
     let imageScrollView = ImageScrollView()
     
     // MARK: - Properties
-    var image: UIImage? {  return imageScrollView.imageZoomView.image }
+    var image: UIImage? {  return imageScrollView.imageZoomView?.image }
     
     // MARK: - Init
     override init(frame: CGRect) {
