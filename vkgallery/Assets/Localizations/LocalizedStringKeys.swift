@@ -24,4 +24,6 @@ enum LocalizedStringKeys {
     static let kAreYouSure = "kAreYouSure"
     static let kYes = "kYes"
     static let kCancel = "kCancel"
+    static let kErrorGetImageForShare = "kErrorGetImageForShare"
+    static let kErrorGetPhotosFromAlbum = "kErrorGetPhotosFromAlbum"
 }

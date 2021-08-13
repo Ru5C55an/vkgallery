@@ -22,3 +22,5 @@
 "kAreYouSure" = "Вы уверены?";
 "kYes" = "Да";
 "kCancel" = "Отмена";
+"kErrorGetImageForShare" = "Ошибка получени изображенения";
+"kErrorGetPhotosFromAlbum" = "Ошибка получения фото с альбома";

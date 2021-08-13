@@ -153,6 +153,9 @@ final class FullscreenPhotosVC: UIViewController {
     @objc private func shareAction() {
         guard let cell = fullscreenImagesCollectionView.visibleCells.first, let image = (cell as? ZommablePhotoCell)?.image else {
             print("ERROR_LOG Error get image in share action")
+            let errorAlert = SPAlertView(title: NSLocalizedString(LocalizedStringKeys.kErrorGetImageForShare, comment: "Ошибка получения изображения"), preset: .error)
+            errorAlert.dismissByTap = true
+            errorAlert.present(duration: 5, haptic: .error, completion: nil)
             return
         }
 

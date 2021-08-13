@@ -85,10 +85,10 @@ final class FeedVC: UIViewController {
                 completion?()
             case .failure(let error):
                 completion?()
-                let alertView = SPAlertView(title: error.message, preset: .error)
-                alertView.dismissByTap = true
-                alertView.present(duration: 5, haptic: .error, completion: nil)
-                print("ERROR_LOG Error get photos from album user: ", error.message)
+                print("ERROR_LOG Error get photos from album \(Constants.albumId), owner \(Constants.ownerId): ", error.message)
+                let errorAlert = SPAlertView(title: NSLocalizedString(LocalizedStringKeys.kErrorGetPhotosFromAlbum, comment: "Ошибка получения фото с альбома"), message: error.message, preset: .error)
+                errorAlert.dismissByTap = true
+                errorAlert.present(duration: 5, haptic: .error, completion: nil)
             }
         }
     }

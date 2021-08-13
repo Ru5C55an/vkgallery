@@ -22,3 +22,5 @@
 "kAreYouSure" = "Are you sure?";
 "kYes" = "Yes";
 "kCancel" = "Cancel";
+"kErrorGetImageForShare" = "Error get image for share";
+"kErrorGetPhotosFromAlbum" = "Error get photos from album";
