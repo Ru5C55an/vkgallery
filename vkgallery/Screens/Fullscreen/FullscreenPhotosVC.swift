@@ -234,6 +234,7 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
                     index += 1
                 }
             }
+            
             smallImagesCollectionView.scrollToItem(at: [indexPath.section, index], at: .centeredHorizontally, animated: true)
             prevIndex = indexPath.row
             
@@ -251,7 +252,6 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         guard collectionView == smallImagesCollectionView else { return }
         
         let image = images[indexPath.row]
@@ -268,6 +268,16 @@ extension FullscreenPhotosVC: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         fullscreenImagesCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         setTitleWith(timeInterval: image.date)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let visibleCellIndexPath = fullscreenImagesCollectionView.indexPathsForVisibleItems.last {
+            let visibleImage = images[visibleCellIndexPath.row]
+            selectedImage = visibleImage
+            setTitleWith(timeInterval: visibleImage.date)
+        } else {
+            print("ERROR_LOG No visible items in fullscreenImagesCollectionView")
+        }
     }
 }
 
