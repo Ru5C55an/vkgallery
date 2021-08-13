@@ -73,7 +73,6 @@ final class FeedVC: UIViewController {
     
     // MARK: - Get photos
     private func getPhotos(completion: (() -> ())? = nil) {
-        if !photos.isEmpty { photos.removeAll() }
         let request = GetPhotosRequest(ownerId: Constants.ownerId, albumId: Constants.albumId)
         PhotosAPI.getPhotos(request: request) { [weak self] result in
             switch result {
