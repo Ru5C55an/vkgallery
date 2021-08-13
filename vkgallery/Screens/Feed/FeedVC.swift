@@ -24,6 +24,11 @@ final class FeedVC: UIViewController {
     }
     
     // MARK: - UI Elements
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = Constants.itemSpacing
@@ -33,6 +38,7 @@ final class FeedVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
     
@@ -54,8 +60,19 @@ final class FeedVC: UIViewController {
         navigationController?.navigationBar.standardAppearance.shadowColor = .clear
     }
     
+    deinit {
+        print("Deinitialized FeedVC")
+    }
+    
+    // MARK: - Refresh
+    @objc private func refresh(_ sender: UIRefreshControl) {
+        getPhotos {
+            sender.endRefreshing()
+        }
+    }
+    
     // MARK: - Get photos
-    private func getPhotos() {
+    private func getPhotos(completion: (() -> ())? = nil) {
         if !photos.isEmpty { photos.removeAll() }
         let request = GetPhotosRequest(ownerId: Constants.ownerId, albumId: Constants.albumId)
         PhotosAPI.getPhotos(request: request) { [weak self] result in
@@ -65,7 +82,9 @@ final class FeedVC: UIViewController {
                 print("Successfull get photos for ownerId \(Constants.ownerId), albumId \(Constants.albumId): ", response)
                 self?.photos = response.response.items
                 self?.collectionView.reloadData()
+                completion?()
             case .failure(let error):
+                completion?()
                 let alertView = SPAlertView(title: error.message, preset: .error)
                 alertView.dismissByTap = true
                 alertView.present(duration: 5, haptic: .error, completion: nil)
