@@ -15,6 +15,7 @@ final class FullscreenPhotosVC: UIViewController {
     private enum Constants {
         static let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         static let itemSpacing: CGFloat = 2
+        static let bottomNavLineColor: UIColor = .black.withAlphaComponent(0.1)
     }
     
     // MARK: - UI Elements
@@ -43,6 +44,12 @@ final class FullscreenPhotosVC: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
+    }()
+    
+    private lazy var shareBarButtonItem: UIBarButtonItem = {
+        let shareImage = UIImage(named: "share")?.withTintColor(.primaryColor, renderingMode: .alwaysOriginal)
+        let barButtonItem = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareAction))
+        return barButtonItem
     }()
     
     // MARK: - Haptic feedback
@@ -76,10 +83,7 @@ final class FullscreenPhotosVC: UIViewController {
         setupViews()
         setupConstraints()
         prevIndex = indexForSelectedImage ?? 0
-        DispatchQueue.main.async {
-            self.fullscreenImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
-            self.smallImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
-        }
+        scrollToSelectedImage()
     }
     
     deinit {
@@ -89,10 +93,7 @@ final class FullscreenPhotosVC: UIViewController {
     // MARK: - setupNavBar
     private func setupNavBar() {
         setTitleWith(timeInterval: selectedImage.date)
-        navigationController?.navigationBar.standardAppearance.shadowColor = .lightGray
-        
-        let shareImage = UIImage(named: "share")?.withTintColor(.primaryColor, renderingMode: .alwaysOriginal)
-        let shareBarButtonItem = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareAction))
+        navigationController?.navigationBar.standardAppearance.shadowColor = Constants.bottomNavLineColor
         navigationItem.rightBarButtonItem = shareBarButtonItem
     }
     
@@ -118,13 +119,22 @@ final class FullscreenPhotosVC: UIViewController {
         }
     }
     
-    // MARK: - Functions
+    // MARK: - Scroll to selected image
+    private func scrollToSelectedImage() {
+        DispatchQueue.main.async {
+            self.fullscreenImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+            self.smallImagesCollectionView.scrollToItem(at: [0, self.indexForSelectedImage ?? 0], at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    // MARK: - Setup date title
     private func setTitleWith(timeInterval: TimeInterval) {
         let date = Date(timeIntervalSince1970: timeInterval)
         let dateString = DateFormatter.ddMMMMyyyy.string(from: date)
         navigationItem.title = dateString
     }
     
+    // MARK: - Set fullscreen image
     private func setImageFor(imageScrollView: ImageScrollView, url: URL, completion: ((UIImage) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             self?.getImage(by: url) { image in
